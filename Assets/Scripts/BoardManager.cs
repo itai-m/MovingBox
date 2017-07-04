@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using System;
-using System.Collections.Generic;       //Allows us to use Lists.
-using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine random number generator.
+
 
 namespace Completed {
 
@@ -13,17 +11,28 @@ namespace Completed {
         public GameObject exit;                                         //Prefab to spawn for exit.
         public GameObject mapHolder;
         private Map map;
-        private int currentLevel;
         public GameObject cameraToAjust;
         public GameObject player;
 
         public Vector2 boardRealSize;
+
+        public Map Map {
+            get { return map; }
+        }
 
         //SetupScene initializes our level and calls the previous functions to lay out the game board
         public void SetupScene(int level) {
             initMap();
             CleanMap();
             loadMap(level);
+            AjustCam();
+        }
+
+        public void SetupWithMap(Map newMap, int level) {
+            initMap();
+            map = newMap;
+            columns = map.col;
+            rows = map.row;
             AjustCam();
         }
 

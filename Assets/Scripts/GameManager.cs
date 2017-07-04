@@ -1,33 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.SceneManagement;
 
 namespace Completed {
+    using System;
     using System.Collections.Generic;       //Allows us to use Lists. 
 
     public class GameManager : MonoBehaviour {
 
-        public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
         private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
-        private int level = 0;                                  //Current level number, expressed in game as "Day 1".
+        private int level = 0;
+
 
         //Awake is always called before any Start functions
         void Awake() {
-            //Check if instance already exists
-            if (instance == null)
-
-                //if not, set instance to this
-                instance = this;
-
-            //If instance already exists and it's not this:
-            else if (instance != this)
-
-                //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
-                Destroy(gameObject);
-
-            //Sets this to not be destroyed when reloading scene
-            DontDestroyOnLoad(gameObject);
-
+            //DontDestroyOnLoad(transform.gameObject);
             //Get a component reference to the attached BoardManager script
             boardScript = GetComponent<BoardManager>();
 
@@ -36,13 +22,17 @@ namespace Completed {
         }
 
         //Initializes the game for each level.
-        void InitGame() {
-            //Call the SetupScene function of the BoardManager script, pass it current level number.
-            //boardScript.SetupScene(level);
-
+        public void InitGame() {
+            level = RefManager.Instance.level;
+            if (RefManager.Instance.isGamePause) {
+                boardScript.SetupWithMap(RefManager.Instance.savedMap, level);
+            }
+            else {
+                //Call the SetupScene function of the BoardManager script, pass it current level number.
+                boardScript.SetupScene(level);
+            }
+            
         }
-
-
 
         //Update is called every frame.
         void Update() {
@@ -61,6 +51,14 @@ namespace Completed {
 
         public void OpenMapEditor() {
             SceneManager.LoadScene("MapEditor");
+        }
+
+        public void OpenLevel(LevelWorld world, int newLevel) {
+            boardScript.SetupScene(newLevel);
+        }
+
+        public void PauseGame() {
+            RefManager.Instance.savedMap = boardScript.Map;
         }
     }
 }
