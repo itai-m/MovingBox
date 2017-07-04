@@ -139,10 +139,7 @@ public class Map : MonoBehaviour {
     }
 
 }
-<<<<<<< HEAD
 
 class savedMap {
 
 }
-=======
->>>>>>> fef21a562409a4a88c84ea3c8e4d97d9a6bd29ab

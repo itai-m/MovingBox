@@ -1,11 +1,4 @@
 ﻿using UnityEngine;
-<<<<<<< HEAD
-
-=======
-using System;
-using System.Collections.Generic;       //Allows us to use Lists.
-using Random = UnityEngine.Random;      //Tells Random to use the Unity Engine random number generator.
->>>>>>> fef21a562409a4a88c84ea3c8e4d97d9a6bd29ab
 
 namespace Completed {
 
@@ -17,22 +10,15 @@ namespace Completed {
         public GameObject exit;                                         //Prefab to spawn for exit.
         public GameObject mapHolder;
         private Map map;
-<<<<<<< HEAD
-=======
-        private int currentLevel;
->>>>>>> fef21a562409a4a88c84ea3c8e4d97d9a6bd29ab
         public GameObject cameraToAjust;
         public GameObject player;
 
         public Vector2 boardRealSize;
 
-<<<<<<< HEAD
         public Map Map {
             get { return map; }
         }
 
-=======
->>>>>>> fef21a562409a4a88c84ea3c8e4d97d9a6bd29ab
         //SetupScene initializes our level and calls the previous functions to lay out the game board
         public void SetupScene(int level) {
             initMap();
@@ -41,7 +27,6 @@ namespace Completed {
             AjustCam();
         }
 
-<<<<<<< HEAD
         public void SetupWithMap(Map newMap, int level) {
             initMap();
             map = newMap;
@@ -50,8 +35,6 @@ namespace Completed {
             AjustCam();
         }
 
-=======
->>>>>>> fef21a562409a4a88c84ea3c8e4d97d9a6bd29ab
         private void AjustCam() {
             cameraToAjust.GetComponent<AjustCam>().ajustCam(columns, rows);
         }

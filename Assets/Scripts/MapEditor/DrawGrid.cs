@@ -90,13 +90,8 @@ public class DrawGrid : MonoBehaviour {
         myLine.transform.position = start;
         myLine.AddComponent<LineRenderer>();
         LineRenderer lr = myLine.GetComponent<LineRenderer>();
-<<<<<<< HEAD
         //lr.SetColors(color, color);
         //lr.SetWidth(0.1f, 0.1f);
-=======
-        lr.SetColors(color, color);
-        lr.SetWidth(0.1f, 0.1f);
->>>>>>> fef21a562409a4a88c84ea3c8e4d97d9a6bd29ab
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
         //GameObject.Destroy(myLine, 0.1F);
