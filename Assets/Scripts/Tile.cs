@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Tile : MonoBehaviour {
 
-    public enum TileType {MoveingBoxUp, MoveingBoxDown, MoveingBoxLeft, MoveingBoxRight, Empty, NonMovingTile, Exit};
+    public enum TileType {MoveingBoxUp, MoveingBoxDown, MoveingBoxLeft, MoveingBoxRight, Empty, NonMovingTile, Exit, Player};
     public TileType type;
     public Postion2D pos;
 }

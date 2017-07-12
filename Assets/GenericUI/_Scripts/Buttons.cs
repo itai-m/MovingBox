@@ -38,8 +38,19 @@ public class Buttons : MonoBehaviour {
         LevelSelector.Instance.previsWorld();
     }
 
-    public void OpenPauseMenu() {
-
+    public void LoadEditorUI() {
+        UIManager.Instance.LoadMapEditorUI();
     }
 
+    public void LoadMapList(bool forPlay) {
+        UIManager.Instance.LoadMapList(forPlay);
+    }
+
+    public void MapListLoad() {
+        UIManager.Instance.MapListLoad();
+    }
+
+    public void LoadMapEditor() {
+        UIManager.Instance.LoadMapEditor();
+    }
 }

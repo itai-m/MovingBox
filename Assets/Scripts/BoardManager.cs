@@ -24,15 +24,17 @@ namespace Completed {
             initMap();
             CleanMap();
             loadMap(level);
-            AjustCam();
+            InitBoard();
         }
 
-        public void SetupWithMap(Map newMap, int level) {
+        public void SetupWithMap(string newMapName) {
             initMap();
-            map = newMap;
+            MapSaver mapSaver = new MapSaver();
+            mapSaver.LoadMap(newMapName, true);
+            map.LoadMapFromSavedMap(mapSaver.GetMap());
             columns = map.col;
             rows = map.row;
-            AjustCam();
+            InitBoard();
         }
 
         private void AjustCam() {
@@ -44,11 +46,14 @@ namespace Completed {
                 map.loadExmpleMap();
             } else {
                 map.loadMap1();
-            }
-            
+            }     
+        }
+
+        private void InitBoard() {
             instantiateMap(mapHolder);
             setBoardRealSize();
             setPlayerPostion();
+            AjustCam();
         }
 
         private void instantiateMap(GameObject perent) {
@@ -56,6 +61,7 @@ namespace Completed {
             rows = map.row;
             for (int i = 0; i < columns; i++) {
                 for (int j = 0; j < rows; j++) {
+
                     if (map.tileIn(i,j) != null) {
                         GameObject temp = GameObjectUtil.Instantiate(map.tileIn(i, j), new Vector2(i, j), perent.transform);
                         MoveingBox moveingBox = temp.GetComponent<MoveingBox>();

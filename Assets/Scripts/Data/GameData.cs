@@ -19,12 +19,10 @@ public class GameData : MonoBehaviour , LevelData   {
     public void Startlevel(LevelWorld world, int level) {
         RefManager.Instance.level = level;
         SceneManager.LoadScene("Game");
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
     }
 
     public bool PauseGame() {
         RefManager.Instance.getGameManager().PauseGame();
-        Screen.orientation = ScreenOrientation.Portrait;
         return true;
     }
 

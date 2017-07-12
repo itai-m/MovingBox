@@ -130,6 +130,9 @@
     <Compile Include="Assets\Scripts\MapEditor\GridControl.cs" />
     <Compile Include="Assets\Scripts\MapEditor\MapEditorManager.cs" />
     <Compile Include="Assets\Scripts\MapEditor\MapEditorUI.cs" />
+    <Compile Include="Assets\Scripts\MapEditor\MapList.cs" />
+    <Compile Include="Assets\Scripts\MapEditor\MapListElement.cs" />
+    <Compile Include="Assets\Scripts\MapEditor\MapSaver.cs" />
     <Compile Include="Assets\Scripts\MapEditor\NewTileMapMenu.cs" />
     <Compile Include="Assets\Scripts\MapEditor\TileMap.cs" />
     <Compile Include="Assets\Scripts\MapEditor\TileMapEditor.cs" />
@@ -144,6 +147,7 @@
     <Compile Include="Assets\Scripts\RecycleGameObject.cs" />
     <Compile Include="Assets\Scripts\RefManager.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
+    <Compile Include="Assets\Scripts\SpriteManager.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\uGUITools.cs" />
   </ItemGroup>

@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Completed {
     public class MapEditorUI : MonoBehaviour {
 
-        public UnityEngine.UI.Text ColText;
-        public UnityEngine.UI.Text RowText;
-        public UnityEngine.UI.Text WarrningText;
+        public Text ColText;
+        public Text RowText;
+        public Text WarrningText;
 
         private const string warrningMsgPre = "The input ";
         private const string warrningMsgAfter = " not enter correctly";
@@ -19,17 +20,19 @@ namespace Completed {
 
         public void StartMapEditor() {
             int colNum = 0, rowNum = 0;
-            if (!validteColAndRow(ColText.text, RowText.text, colNum, rowNum)) {
+            if (!validteColAndRow(ColText.text, RowText.text, out colNum, out rowNum)) {
                 return;
             }
-            GameObject.Find("GameManager").GetComponent<GameManager>().OpenMapEditor();
+            RefManager.Instance.mapEditorCol = colNum;
+            RefManager.Instance.mapEditorRow = rowNum;
+            RefManager.Instance.mapEditorName = "";
+            UIManager.Instance.LoadMapEditor();
         }
 
-        public void LoadMapEditor(int index) {
+        
 
-        }
-
-        private bool validteColAndRow(string col, string row, int colNum, int rowNum) {
+        private bool validteColAndRow(string col, string row, out int colNum, out int rowNum) {
+            rowNum = 0;
             if (!validNumber(col, out colNum)) {
                 sendValidMsg("Columns");
                 return false;

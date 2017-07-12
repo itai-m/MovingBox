@@ -9,16 +9,26 @@ public class UIManager : Singleton<UIManager> {
     private const string levelSelectorName = "LevelSelector";
     private const string mainMenuName = "Main";
     private const string settinguName = "Setting";
+    private const string mapEditorUIName = "MapEditorUI";
+    private const string mapListName = "MapList";
+    private const string mapEditorName = "MapEditor";
 
     private bool isPause;
     private float timeScale;
     private Scene gameScene;
     private SavedProgression savedProgression;
 
+    private bool isMapListForPlay;
+
     private LevelWorld currentWorld;
     private int currentLevel;
 
     public LevelData levelCretion;
+
+    public bool IsMapListForPlay {
+        get { return isMapListForPlay; }
+        set { isMapListForPlay = value; }
+    }
 
     public Setting Settings {
         get { return savedProgression.setting; }
@@ -40,6 +50,7 @@ public class UIManager : Singleton<UIManager> {
             Destroy(gameObject);
         }
         else {
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
             initUIManager();
             DontDestroyOnLoad(gameObject);
         }
@@ -71,6 +82,7 @@ public class UIManager : Singleton<UIManager> {
     public bool isOneLevelGame = false;
 
     public void LoadLevelSelector() {
+        RefManager.Instance.mapEditorName = "";
         if (isOneLevelGame) {
             Startlevel(null, 0);
         }
@@ -83,8 +95,21 @@ public class UIManager : Singleton<UIManager> {
         SceneManager.LoadScene(mainMenuName, isAdditive ? LoadSceneMode.Additive : LoadSceneMode.Single);
     }
 
+    public void LoadMapEditorUI() {
+        SceneManager.LoadScene(mapEditorUIName);
+    }
+
     public void LoadSettingScreen() {
         SceneManager.LoadScene(settinguName);
+    }
+
+    public void LoadMapList(bool forPlay) {
+        isMapListForPlay = forPlay;
+        SceneManager.LoadScene(mapListName);
+    }
+
+    public void LoadMapEditor() {
+        SceneManager.LoadScene(mapEditorName);
     }
 
     public void PauseGameAndReturnToMain() {
@@ -139,5 +164,13 @@ public class UIManager : Singleton<UIManager> {
     public bool isLevelOpen(LevelWorld world, int level) {
         return levelCretion.isLevelOpen(world, level);
     }
+    
+    public void MapListLoad() {
+        if (isMapListForPlay) {
+            Startlevel(null, 0);
+        } else {
+            LoadMapEditor();
+        }
+    }
 
-}
+ }

@@ -6,17 +6,15 @@ public class MapEditorManager : MonoBehaviour {
 
     public GameObject TilePickPanel;
     public GameObject GridPanel;
+    public GameObject menuPanel;
 
     private TilePicker picker;
+    private GridControl grid;
 
     // Use this for initialization
     void Start () {
         picker = TilePickPanel.GetComponent<TilePicker>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+        grid = GridPanel.GetComponent<GridControl>();
 	}
 
     public void InitMapEditor(int col, int row) {
@@ -25,5 +23,21 @@ public class MapEditorManager : MonoBehaviour {
 
     public void loadMap() {
 
+    }
+
+    public void SaveMap() {
+        grid.SaveMap();
+    }
+
+    public Tile.TileType getSelectedTile() {
+        return picker.getSelectedTile();
+    }
+
+    public void openMenu() {
+        menuPanel.SetActive(true);
+    }
+
+    public void closeMenu() {
+        menuPanel.SetActive(false);
     }
 }

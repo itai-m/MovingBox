@@ -2,8 +2,6 @@
 using UnityEngine.SceneManagement;
 
 namespace Completed {
-    using System;
-    using System.Collections.Generic;       //Allows us to use Lists. 
 
     public class GameManager : MonoBehaviour {
 
@@ -13,7 +11,6 @@ namespace Completed {
 
         //Awake is always called before any Start functions
         void Awake() {
-            //DontDestroyOnLoad(transform.gameObject);
             //Get a component reference to the attached BoardManager script
             boardScript = GetComponent<BoardManager>();
 
@@ -24,8 +21,8 @@ namespace Completed {
         //Initializes the game for each level.
         public void InitGame() {
             level = RefManager.Instance.level;
-            if (RefManager.Instance.isGamePause) {
-                boardScript.SetupWithMap(RefManager.Instance.savedMap, level);
+            if (RefManager.Instance.mapEditorName.Length != 0) {
+                boardScript.SetupWithMap(RefManager.Instance.mapEditorName);
             }
             else {
                 //Call the SetupScene function of the BoardManager script, pass it current level number.
@@ -49,15 +46,12 @@ namespace Completed {
             boardScript.SetupScene(level);
         }
 
-        public void OpenMapEditor() {
-            SceneManager.LoadScene("MapEditor");
-        }
         public void OpenLevel(LevelWorld world, int newLevel) {
             boardScript.SetupScene(newLevel);
         }
 
         public void PauseGame() {
-            RefManager.Instance.savedMap = boardScript.Map;
+            
         }
     }
 }

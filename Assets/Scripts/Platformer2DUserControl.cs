@@ -32,12 +32,9 @@ namespace UnityStandardAssets._2D
             float v = CrossPlatformInputManager.GetAxis("Vertical");
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             // Pass all parameters to the character control script.
-            m_Character.Move(h, v > 0, v < 0, m_shot);
-            m_shot = false;
+            m_Character.Move(h, v > 0, v < 0, !m_shot && CrossPlatformInputManager.GetButton("Fire1"));
+            m_shot = CrossPlatformInputManager.GetButton("Fire1");
         }
 
-        public void Shot() {
-            m_shot = true;
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Map : MonoBehaviour {
 
@@ -10,15 +11,23 @@ public class Map : MonoBehaviour {
     public GameObject MoveingBoxUp, MoveingBoxDown, MoveingBoxLeft, MoveingBoxRight, NonMovingTile;
     public GameObject ExitTile;
 
+    public GameObject player;
+
     public Vector2 playerStart;
 
     void Start() {
     }
 
+    public void LoadMapFromSavedMap(SavedMap map) {
+        initMapFormArray(map.GetMap());
+        rotateMapRight();
+        rotateMapRight();
+    }
+
     public void loadExmpleMap() {
         Tile.TileType[,] newMap = {  { Tile.TileType.NonMovingTile, Tile.TileType.Empty,         Tile.TileType.MoveingBoxDown,   Tile.TileType.Empty,        Tile.TileType.Empty,           Tile.TileType.Empty,            Tile.TileType.NonMovingTile},
                                      { Tile.TileType.NonMovingTile, Tile.TileType.Empty,         Tile.TileType.Empty,            Tile.TileType.Empty,        Tile.TileType.Empty,           Tile.TileType.Empty,            Tile.TileType.MoveingBoxRight },
-                                     { Tile.TileType.Exit,          Tile.TileType.Empty,         Tile.TileType.MoveingBoxUp,     Tile.TileType.Empty,        Tile.TileType.Empty,           Tile.TileType.Empty,            Tile.TileType.MoveingBoxLeft },
+                                     { Tile.TileType.Exit,          Tile.TileType.Player,         Tile.TileType.MoveingBoxUp,     Tile.TileType.Empty,       Tile.TileType.Player,          Tile.TileType.Empty,            Tile.TileType.MoveingBoxLeft },
                                      { Tile.TileType.NonMovingTile, Tile.TileType.NonMovingTile, Tile.TileType.NonMovingTile,    Tile.TileType.MoveingBoxUp, Tile.TileType.NonMovingTile,   Tile.TileType.NonMovingTile,    Tile.TileType.NonMovingTile },};
         initMapFormArray(newMap);
         rotateMapRight();
@@ -34,7 +43,7 @@ public class Map : MonoBehaviour {
                                      {Tile.TileType.NonMovingTile,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.MoveingBoxUp,Tile.TileType.Empty,Tile.TileType.MoveingBoxDown,Tile.TileType.Empty,Tile.TileType.MoveingBoxUp,Tile.TileType.Empty,Tile.TileType.MoveingBoxDown,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.NonMovingTile},
                                      {Tile.TileType.NonMovingTile,Tile.TileType.MoveingBoxUp,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.NonMovingTile,Tile.TileType.Empty,Tile.TileType.NonMovingTile},
                                      {Tile.TileType.NonMovingTile,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.MoveingBoxUp,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.NonMovingTile},
-                                     {Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.MoveingBoxUp,Tile.TileType.MoveingBoxUp,Tile.TileType.MoveingBoxUp,Tile.TileType.Empty,Tile.TileType.MoveingBoxUp,Tile.TileType.MoveingBoxUp,Tile.TileType.MoveingBoxRight,Tile.TileType.NonMovingTile,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty},
+                                     {Tile.TileType.Empty,Tile.TileType.Player,Tile.TileType.MoveingBoxUp,Tile.TileType.MoveingBoxUp,Tile.TileType.MoveingBoxUp,Tile.TileType.Empty,Tile.TileType.MoveingBoxUp,Tile.TileType.MoveingBoxUp,Tile.TileType.MoveingBoxRight,Tile.TileType.NonMovingTile,Tile.TileType.Empty,Tile.TileType.Empty,Tile.TileType.Empty},
                                      {Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.MoveingBoxUp,Tile.TileType.NonMovingTile}};
         initMapFormArray(newMap);
         rotateMapRight();
@@ -79,7 +88,10 @@ public class Map : MonoBehaviour {
 
             case Tile.TileType.NonMovingTile:
                 return NonMovingTile;
-                
+
+            case Tile.TileType.Player:
+                return player;
+
             default:
                 return null;
         }
@@ -140,6 +152,3 @@ public class Map : MonoBehaviour {
 
 }
 
-class savedMap {
-
-}

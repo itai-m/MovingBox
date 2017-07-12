@@ -15,14 +15,26 @@ public class GridControl : MonoBehaviour {
     public GameObject genricMapEditorButton;
 
     // Use this for initialization
-    void Start () {
-        grid = GetComponent<GridLayoutGroup>();
-        initGridLayout();
-        AddButtonsToGrid();
-
+    void Start () {   
+        if (!loadMap()) {
+            AddEmptyButtonsToGrid();
+        }
     }
 
-    private void AddButtonsToGrid() {
+    private bool loadMap() {
+        if (RefManager.Instance.mapEditorName.Length == 0) {
+            return false;
+        }
+        MapSaver mapSaver = new MapSaver(RefManager.Instance.mapEditorName, true);
+        ConvertMapToGrid(mapSaver.GetMap());
+        return true;
+    }
+
+
+    private void AddEmptyButtonsToGrid() {
+        col = RefManager.Instance.mapEditorCol;
+        row = RefManager.Instance.mapEditorRow;
+        initGridLayout();
         for (int i = 0; i < col * row; i++) {
             GameObject newTile = GameObjectUtil.Instantiate(genricMapEditorButton, Vector2.zero, transform);
             newTile.transform.localScale = Vector3.one;
@@ -30,6 +42,7 @@ public class GridControl : MonoBehaviour {
     }
 
     private void initGridLayout() {
+        grid = GetComponent<GridLayoutGroup>();
         RectTransform levelsPanelTransform = GetComponent<RectTransform>();
         float newPanelHight = levelsPanelTransform.rect.height;
         float buttonHight = newPanelHight * buttonSpaceRelHight / row;
@@ -41,15 +54,44 @@ public class GridControl : MonoBehaviour {
         grid.cellSize = new Vector2(buttonWide, buttonHight);
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
-
     public GameObject getTileButton(int x, int y) {
         if (x > col || y > row) {
             return null;
         }
-        return transform.GetChild(x * col + y).gameObject;
+        return transform.GetChild(y * col + x).gameObject;
+    }
+
+    public void SaveMap() {
+        MapSaver mapSaver = new MapSaver(ConvertGridToMap());
+        mapSaver.Save("test", true);
+    }
+
+    private void ConvertMapToGrid(SavedMap map) {
+        col = map.GetCol();
+        row = map.GetRow();
+        initGridLayout();
+        
+            for (int j = 0; j < row; j++) {
+            for (int i = 0; i < col; i++) {
+                GameObject newTile = GameObjectUtil.Instantiate(genricMapEditorButton, Vector2.zero, transform);
+                newTile.transform.localScale = Vector3.one;
+                newTile.GetComponent<TileMapEditorButton>().ChangeTile(map.GetTile(i, j));
+            }
+        }
+    }
+
+    private SavedMap ConvertGridToMap() {
+        SavedMap map = new SavedMap(col, row);
+        
+            for (int j = 0; j < row; j++) {
+            for (int i = 0; i < col; i++) {
+                map.SetTile(i, j, GetTileType(i, j));
+            }
+        }
+        return map;
+    }
+
+    private Tile.TileType GetTileType(int col, int row) {
+        return getTileButton(col, row).GetComponent<TileMapEditorButton>().getTileType();
     }
 }
