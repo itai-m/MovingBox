@@ -52,7 +52,6 @@ namespace Completed {
         private void InitBoard() {
             instantiateMap(mapHolder);
             setBoardRealSize();
-            setPlayerPostion();
             AjustCam();
         }
 
@@ -99,8 +98,5 @@ namespace Completed {
             player.GetComponent<MapLooperItem>().updateMapSize();
         }
 
-        private void setPlayerPostion() {
-            player.gameObject.transform.position = map.playerStart;
-        }
     } 
 }

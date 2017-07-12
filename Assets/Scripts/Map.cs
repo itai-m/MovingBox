@@ -13,8 +13,6 @@ public class Map : MonoBehaviour {
 
     public GameObject player;
 
-    public Vector2 playerStart;
-
     void Start() {
     }
 
@@ -31,7 +29,6 @@ public class Map : MonoBehaviour {
                                      { Tile.TileType.NonMovingTile, Tile.TileType.NonMovingTile, Tile.TileType.NonMovingTile,    Tile.TileType.MoveingBoxUp, Tile.TileType.NonMovingTile,   Tile.TileType.NonMovingTile,    Tile.TileType.NonMovingTile },};
         initMapFormArray(newMap);
         rotateMapRight();
-        playerStart = new Vector2(1, 1);
     }
 
     public void loadMap1() {
@@ -47,7 +44,6 @@ public class Map : MonoBehaviour {
                                      {Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.NonMovingTile,Tile.TileType.MoveingBoxUp,Tile.TileType.NonMovingTile}};
         initMapFormArray(newMap);
         rotateMapRight();
-        playerStart = new Vector2(1, 1);
     }
 
     private GameObject[,] initMap(int col, int row) {

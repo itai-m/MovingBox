@@ -33,4 +33,11 @@ public class MapList : MonoBehaviour {
         }
     }
 	
+    public void Rename() {
+
+    }
+
+    public void Delete() {
+
+    }
 }
