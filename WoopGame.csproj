@@ -134,6 +134,7 @@
     <Compile Include="Assets\Scripts\MapEditor\MapListElement.cs" />
     <Compile Include="Assets\Scripts\MapEditor\MapSaver.cs" />
     <Compile Include="Assets\Scripts\MapEditor\NewTileMapMenu.cs" />
+    <Compile Include="Assets\Scripts\MapEditor\RenamePanel.cs" />
     <Compile Include="Assets\Scripts\MapEditor\TileMap.cs" />
     <Compile Include="Assets\Scripts\MapEditor\TileMapEditor.cs" />
     <Compile Include="Assets\Scripts\MapEditor\TileMapEditorButton.cs" />

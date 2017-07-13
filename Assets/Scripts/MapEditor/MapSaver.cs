@@ -49,6 +49,11 @@ public class MapSaver {
         }
     }
 
+    /// <summary>
+    /// Save a map to a file
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <param name="coustomMap"></param>
     public void Save(string fileName, bool coustomMap = false) {
         string tempFileName = fileName;
         int index = 0;
@@ -68,6 +73,14 @@ public class MapSaver {
 
         bf.Serialize(file, map);
         file.Close();
+    }
+
+    public void Rename(string oldFileName, string newFileName, bool coustomMap = false) {
+        File.Move(GetFilePath(coustomMap) + oldFileName, GetFilePath(coustomMap) + newFileName);
+    }
+
+    public void Delete(string fileName, bool coustomMap = false) {
+        File.Delete(GetFilePath(coustomMap) + fileName);
     }
 
     /// <summary>
