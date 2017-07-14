@@ -18,8 +18,9 @@ public class Map : MonoBehaviour {
 
     public void LoadMapFromSavedMap(SavedMap map) {
         initMapFormArray(map.GetMap());
-        rotateMapRight();
-        rotateMapRight();
+        //rotateMapRight();
+        //rotateMapRight();
+        mirroMapViaY();
     }
 
     public void loadExmpleMap() {
@@ -109,6 +110,13 @@ public class Map : MonoBehaviour {
         swapMapSizes();
     }
 
+    private void mirroMapViaY() {
+        if (tiles.GetLength(0) == 0) {
+            return;
+        }
+        tiles = MirrorMatrixOnY(tiles);
+    }
+
     private void swapMapSizes() {
         int temp = col;
         col = row;
@@ -125,6 +133,16 @@ public class Map : MonoBehaviour {
                 newColumn++;
             }
             newRow++;
+        }
+        return newMatrix;
+    }
+
+    private GameObject[,] MirrorMatrixOnY(GameObject[,] oldMatrix) {
+        GameObject[,] newMatrix = new GameObject[oldMatrix.GetLength(0), oldMatrix.GetLength(1)];
+        for (int i = 0; i < newMatrix.GetLength(0); i++) {
+            for (int j = 0; j < newMatrix.GetLength(1); j++) {
+                newMatrix[i, j] = oldMatrix[i, oldMatrix.GetLength(1) - j - 1];
+            }
         }
         return newMatrix;
     }

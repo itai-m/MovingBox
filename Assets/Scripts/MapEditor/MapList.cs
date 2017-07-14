@@ -23,6 +23,7 @@ public class MapList : MonoBehaviour {
             GameObject nameObj = GameObjectUtil.Instantiate(mapNameObj, Vector3.zero, transform);
             nameObj.transform.localScale = Vector3.one;
             nameObj.GetComponent<Text>().text = mapName.Substring(mapSaver.GetFilePath(true).Length);
+            nameObj.GetComponent<MapListElement>().Init();
         }
     }
 
