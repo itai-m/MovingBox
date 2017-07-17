@@ -139,6 +139,7 @@
     <Compile Include="Assets\Scripts\MapEditor\TileMapEditor.cs" />
     <Compile Include="Assets\Scripts\MapEditor\TileMapEditorButton.cs" />
     <Compile Include="Assets\Scripts\MapEditor\TilePicker.cs" />
+    <Compile Include="Assets\Scripts\MapEditor\WarningManager.cs" />
     <Compile Include="Assets\Scripts\MapLooperItem.cs" />
     <Compile Include="Assets\Scripts\MoveingBox.cs" />
     <Compile Include="Assets\Scripts\ObjectPool.cs" />

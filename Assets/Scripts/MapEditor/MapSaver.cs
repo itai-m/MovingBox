@@ -105,8 +105,14 @@ public class MapSaver {
     /// </summary>
     /// <param name="coustomMap"></param>
     /// <returns></returns>
-    public string[] ListOfMaps(bool coustomMap = false) {
-        return Directory.GetFiles(GetFilePath(coustomMap));
+    public string[] ListOfMaps(bool coustomMap = false, bool fullPath = true) {
+        string[] result = Directory.GetFiles(GetFilePath(coustomMap));
+        if (!fullPath) {
+            for (int i = 0; i < result.Length; i++) {
+                result[i] = result[i].Substring(GetFilePath(coustomMap).Length);
+            }
+        }
+        return result;
     }
 
     public string GetFilePath(bool coustomMap) {

@@ -18,8 +18,6 @@ public class Map : MonoBehaviour {
 
     public void LoadMapFromSavedMap(SavedMap map) {
         initMapFormArray(map.GetMap());
-        //rotateMapRight();
-        //rotateMapRight();
         mirroMapViaY();
     }
 

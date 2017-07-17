@@ -14,11 +14,28 @@ public class GridControl : MonoBehaviour {
 
     public GameObject genricMapEditorButton;
 
+    public GameObject renamePanelObj;
+    private RenamePanel renamePanel;
+
     // Use this for initialization
-    void Start () {   
+    void Start () {
+        renamePanel = renamePanelObj.GetComponent<RenamePanel>();
         if (!loadMap()) {
+            if (RefManager.Instance.mapEditorCol != 0 && RefManager.Instance.mapEditorRow != 0) {
+                InitDimansionsFromRefManager();
+            }
             AddEmptyButtonsToGrid();
         }
+    }
+
+    private void InitDimansionsFromRefManager() {
+        col = RefManager.Instance.mapEditorCol;
+        row = RefManager.Instance.mapEditorRow;
+    }
+
+    private void InitDefaultDimansions() {
+        col = 19;
+        row = 10;
     }
 
     private bool loadMap() {
@@ -32,8 +49,6 @@ public class GridControl : MonoBehaviour {
 
 
     private void AddEmptyButtonsToGrid() {
-        col = RefManager.Instance.mapEditorCol;
-        row = RefManager.Instance.mapEditorRow;
         initGridLayout();
         for (int i = 0; i < col * row; i++) {
             GameObject newTile = GameObjectUtil.Instantiate(genricMapEditorButton, Vector2.zero, transform);
@@ -62,8 +77,22 @@ public class GridControl : MonoBehaviour {
     }
 
     public void SaveMap() {
+        OpenNamePanel();
+        renamePanel.afterSave = AfterSave;
+        renamePanel.saveMapFun = SaveMap;
+    }
+
+    public void SaveMap(string mapName) {
         MapSaver mapSaver = new MapSaver(ConvertGridToMap());
-        mapSaver.Save("test", true);
+        mapSaver.Save(mapName, true);
+    }
+
+    private void AfterSave() {
+        //TODO: send a msg that its save the map
+    }
+
+    private void OpenNamePanel() {
+        renamePanelObj.SetActive(true);
     }
 
     private void ConvertMapToGrid(SavedMap map) {
@@ -82,8 +111,7 @@ public class GridControl : MonoBehaviour {
 
     private SavedMap ConvertGridToMap() {
         SavedMap map = new SavedMap(col, row);
-        
-            for (int j = 0; j < row; j++) {
+        for (int j = 0; j < row; j++) {
             for (int i = 0; i < col; i++) {
                 map.SetTile(i, j, GetTileType(i, j));
             }

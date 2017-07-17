@@ -11,14 +11,21 @@ public class RenamePanel : MonoBehaviour {
     public delegate void AfterSave();
     public AfterSave afterSave;
 
+    public delegate void SaveMapFun(string mapName);
+    public SaveMapFun saveMapFun;
+
+    public GameObject warningManagerObj;
+    private WarningManager warningManager;
+
 	// Use this for initialization
 	void Start () {
         mapSaver = new MapSaver();
+        warningManager = warningManagerObj.GetComponent<WarningManager>();
 	}
 
 	
 	private bool IsMapExist(string mapName) {
-        string[] mapList = mapSaver.ListOfMaps(true);
+        string[] mapList = mapSaver.ListOfMaps(true, false);
         for (int i = 0; i < mapList.Length; i++) {
             if (mapList[i].Equals(mapName)) {
                 return true;
@@ -28,15 +35,42 @@ public class RenamePanel : MonoBehaviour {
     }
 
     private bool validName(string name) {
-        return (name == null || name.Length == 0);
+        if (name == null || name.Length == 0) {
+            return false;
+        }
+        if (IsMapExist(name)) {
+            OpenWarningPanel();
+            return false;
+        }
+        return true;
+    }
+
+    private void OpenWarningPanel() {
+        warningManager.PostiveCall = SaveAndOvrride;
+        warningManagerObj.SetActive(true);
+    }
+
+    public void SaveAndOvrride() {
+        string newName = textMapName.text;
+        mapSaver.Delete(newName, true);
+        RenameAndClose(newName);
     }
 
     public void SaveMap() {
         string newName = textMapName.text;
-        if (validName(newName)) {
+        if (!validName(newName)) {
             return;
         }
-        mapSaver.Rename(RefManager.Instance.mapEditorName, newName, true);
+        RenameAndClose(newName);
+    }
+
+    private void RenameAndClose(string newName) {
+        if (saveMapFun != null) {
+            saveMapFun(newName);
+        }
+        else {
+            mapSaver.Rename(RefManager.Instance.mapEditorName, newName, true);
+        }
         afterSave();
         ClosePanel();
     }
