@@ -126,7 +126,6 @@
     <Compile Include="Assets\Scripts\Input\TouchPad.cs" />
     <Compile Include="Assets\Scripts\Input\VirtualInput.cs" />
     <Compile Include="Assets\Scripts\Map.cs" />
-    <Compile Include="Assets\Scripts\MapEditor\DrawGrid.cs" />
     <Compile Include="Assets\Scripts\MapEditor\GridControl.cs" />
     <Compile Include="Assets\Scripts\MapEditor\MapEditorManager.cs" />
     <Compile Include="Assets\Scripts\MapEditor\MapEditorUI.cs" />
