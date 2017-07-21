@@ -43,7 +43,7 @@ namespace Completed {
         }
 
         public void ResetLevel() {
-            boardScript.SetupScene(level);
+            InitGame();
         }
 
         public void OpenLevel(LevelWorld world, int newLevel) {

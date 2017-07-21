@@ -22,7 +22,6 @@ namespace Completed {
         //SetupScene initializes our level and calls the previous functions to lay out the game board
         public void SetupScene(int level) {
             initMap();
-            CleanMap();
             loadMap(level);
             InitBoard();
         }
@@ -83,6 +82,7 @@ namespace Completed {
                 map = GetComponent<Map>();
                 mapHolder = new GameObject("Map");
             }
+            CleanMap();
         }
 
         public bool CanMoveTile(Postion2D to) {
