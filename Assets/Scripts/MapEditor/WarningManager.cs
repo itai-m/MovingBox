@@ -25,12 +25,16 @@ public class WarningManager : MonoBehaviour {
     }
 
     public void Postive() {
-        PostiveCall();
+        if (PostiveCall != null) {
+            PostiveCall();
+        }
         CloseWarning();
     }
 
     public void Negative() {
-        NegativeCall();
+        if (NegativeCall != null) {
+            NegativeCall();
+        }
         CloseWarning();
     }
 
