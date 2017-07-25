@@ -22,10 +22,10 @@ public class Map : MonoBehaviour {
     }
 
     public void loadExmpleMap() {
-        Tile.TileType[,] newMap = {  { Tile.TileType.NonMovingTile, Tile.TileType.Empty,         Tile.TileType.MoveingBoxDown,   Tile.TileType.Empty,        Tile.TileType.Empty,           Tile.TileType.Empty,            Tile.TileType.NonMovingTile},
+        Tile.TileType[,] newMap = {  { Tile.TileType.NonMovingTile, Tile.TileType.Empty,         Tile.TileType.MoveingBoxDown,   Tile.TileType.Empty,        Tile.TileType.NonMovingTile,           Tile.TileType.Empty,            Tile.TileType.NonMovingTile},
                                      { Tile.TileType.NonMovingTile, Tile.TileType.Empty,         Tile.TileType.Empty,            Tile.TileType.Empty,        Tile.TileType.Empty,           Tile.TileType.Empty,            Tile.TileType.MoveingBoxRight },
-                                     { Tile.TileType.Exit,          Tile.TileType.Player,         Tile.TileType.MoveingBoxUp,     Tile.TileType.Empty,       Tile.TileType.Player,          Tile.TileType.Empty,            Tile.TileType.MoveingBoxLeft },
-                                     { Tile.TileType.NonMovingTile, Tile.TileType.NonMovingTile, Tile.TileType.NonMovingTile,    Tile.TileType.MoveingBoxUp, Tile.TileType.NonMovingTile,   Tile.TileType.NonMovingTile,    Tile.TileType.NonMovingTile },};
+                                     { Tile.TileType.Empty,          Tile.TileType.Player,         Tile.TileType.MoveingBoxUp,     Tile.TileType.Empty,       Tile.TileType.Empty,          Tile.TileType.Player,            Tile.TileType.Empty },
+                                     { Tile.TileType.NonMovingTile, Tile.TileType.NonMovingTile, Tile.TileType.NonMovingTile,    Tile.TileType.MoveingBoxUp, Tile.TileType.Empty,   Tile.TileType.NonMovingTile,    Tile.TileType.NonMovingTile },};
         initMapFormArray(newMap);
         rotateMapRight();
     }
@@ -159,7 +159,7 @@ public class Map : MonoBehaviour {
         if (pos.X < 0 || pos.Y < 0 || pos.X >= col || pos.Y >= row) {
             return false;
         }
-        return (tiles[pos.X, pos.Y] == null);
+        return tiles[pos.X, pos.Y] == null || tiles[pos.X, pos.Y] == player;
     }
 
 }

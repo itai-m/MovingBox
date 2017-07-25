@@ -64,4 +64,8 @@ public class Postion2D {
     public int getY() {
         return Y;
     }
+
+    public override string ToString() {
+        return x + "," + y;
+    }
 }

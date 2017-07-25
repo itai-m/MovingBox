@@ -7,6 +7,7 @@ namespace Completed {
 
         private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
         private int level = 0;
+        private bool isInMapEditor;
 
 
         //Awake is always called before any Start functions
@@ -21,7 +22,8 @@ namespace Completed {
         //Initializes the game for each level.
         public void InitGame() {
             level = RefManager.Instance.level;
-            if (RefManager.Instance.mapEditorName.Length != 0) {
+            isInMapEditor = RefManager.Instance.mapEditorName.Length != 0;
+            if (isInMapEditor) {
                 boardScript.SetupWithMap(RefManager.Instance.mapEditorName);
             }
             else {
@@ -39,7 +41,12 @@ namespace Completed {
         }
 
         public void nextLevel() {
-            boardScript.SetupScene(++level);
+            if (isInMapEditor) {
+                UIManager.Instance.LoadMapEditorUI();
+            }
+            else {
+                boardScript.SetupScene(++level);
+            }
         }
 
         public void ResetLevel() {

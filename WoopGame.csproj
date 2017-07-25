@@ -111,7 +111,7 @@
     <Compile Include="Assets\Scripts\ExitTile.cs" />
     <Compile Include="Assets\Scripts\FireScript.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\GameObjectUtil.cs" />
+    <Compile Include="Assets\Scripts\GameWallsManager.cs" />
     <Compile Include="Assets\Scripts\Input\AxisTouchButton.cs" />
     <Compile Include="Assets\Scripts\Input\ButtonHandler.cs" />
     <Compile Include="Assets\Scripts\Input\CrossPlatformInputManager.cs" />
@@ -141,16 +141,17 @@
     <Compile Include="Assets\Scripts\MapEditor\WarningManager.cs" />
     <Compile Include="Assets\Scripts\MapLooperItem.cs" />
     <Compile Include="Assets\Scripts\MoveingBox.cs" />
-    <Compile Include="Assets\Scripts\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Platformer2DUserControl.cs" />
     <Compile Include="Assets\Scripts\PlatformerCharacter2D.cs" />
     <Compile Include="Assets\Scripts\PlayerMovment.cs" />
-    <Compile Include="Assets\Scripts\RecycleGameObject.cs" />
     <Compile Include="Assets\Scripts\RefManager.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\SpriteManager.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
-    <Compile Include="Assets\Scripts\uGUITools.cs" />
+    <Compile Include="Assets\Scripts\Utils\GameObjectUtil.cs" />
+    <Compile Include="Assets\Scripts\Utils\ObjectPool.cs" />
+    <Compile Include="Assets\Scripts\Utils\RecycleGameObject.cs" />
+    <Compile Include="Assets\Scripts\Utils\uGUITools.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

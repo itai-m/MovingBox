@@ -4,9 +4,6 @@ namespace Completed {
 
     public class BoardManager : MonoBehaviour {
 
-
-        public int columns = 8;                                         //Number of columns in our game board.
-        public int rows = 8;                                            //Number of rows in our game board.
         public GameObject exit;                                         //Prefab to spawn for exit.
         public GameObject mapHolder;
         private Map map;
@@ -31,13 +28,11 @@ namespace Completed {
             MapSaver mapSaver = new MapSaver();
             mapSaver.LoadMap(newMapName, true);
             map.LoadMapFromSavedMap(mapSaver.GetMap());
-            columns = map.col;
-            rows = map.row;
             InitBoard();
         }
 
         private void AjustCam() {
-            cameraToAjust.GetComponent<AjustCam>().ajustCam(columns, rows);
+            cameraToAjust.GetComponent<AjustCam>().ajustCam(GetColumns(), GetRows());
         }
 
         private void loadMap(int level) { 
@@ -52,13 +47,12 @@ namespace Completed {
             instantiateMap(mapHolder);
             setBoardRealSize();
             AjustCam();
+            GetComponent<GameWallsManager>().SetWallToMapSize(boardRealSize);
         }
 
         private void instantiateMap(GameObject perent) {
-            columns = map.col;
-            rows = map.row;
-            for (int i = 0; i < columns; i++) {
-                for (int j = 0; j < rows; j++) {
+            for (int i = 0; i < GetColumns(); i++) {
+                for (int j = 0; j < GetRows(); j++) {
 
                     if (map.tileIn(i,j) != null) {
                         GameObject temp = GameObjectUtil.Instantiate(map.tileIn(i, j), new Vector2(i, j), perent.transform);
@@ -94,9 +88,21 @@ namespace Completed {
         }
 
         private void setBoardRealSize() {
-            boardRealSize = new Vector2(columns, rows);
+            boardRealSize = new Vector2(GetColumns(), GetRows());
             player.GetComponent<MapLooperItem>().updateMapSize();
         }
 
+        public bool CanMoveToPosition(Vector2 pos) {
+            Postion2D tilePos = new Postion2D((int)Mathf.Round(pos.x), (int)(pos.y));
+            return map.isEmptyTile(tilePos);
+        }
+
+        public int GetColumns() {
+            return map.col;
+        }
+
+        public int GetRows() {
+            return map.row;
+        }
     } 
 }

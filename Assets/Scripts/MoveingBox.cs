@@ -17,7 +17,7 @@ public class MoveingBox : Tile {
 
     // Use this for initialization
     void Start () {
-        boardManager = GameObject.Find("GameManager").GetComponent<BoardManager>();
+        boardManager = RefManager.Instance.GetBoardManager(); ;
     }
 	
 	// Update is called once per frame

@@ -5,7 +5,9 @@ using UnityEngine;
 namespace Completed {
     public class MapLooperItem : MonoBehaviour {
 
+        private const string tagName = "OtterWalls";
         private Vector2 mapsize;
+        private BoardManager boardManager;
 
         public float deltaX = 0.5F;
         public float deltaY = 0.5F;
@@ -20,20 +22,45 @@ namespace Completed {
 
         // Update is called once per frame
         void Update() {
-            if (transform.position.x <  deltaPosX) {
-                transform.position = new Vector2(mapsize.x - deltaX, transform.position.y);
-            } else if (transform.position.x > mapsize.x - deltaPosX) {
-                transform.position = new Vector2(deltaX, transform.position.y);
+            
+        }
+
+        void OnTriggerEnter2D(Collider2D collision) {
+            if (collision.gameObject.tag.Equals(tagName)) {
+                TryMovePlayerToOtherSide(collision.gameObject.name);
             }
-             if (transform.position.y < deltaPosY ) {
-                transform.position = new Vector2(transform.position.x, mapsize.y - deltaY);
-            } else if (transform.position.y > mapsize.y) {
-                transform.position = new Vector2(transform.position.x, deltaY);
+        }
+
+        private void OnCollisionStay2D(Collision2D collision) {
+            if (collision.gameObject.tag.Equals(tagName)) {
+                TryMovePlayerToOtherSide(collision.gameObject.name);
+            }
+        }
+
+        private void TryMovePlayerToOtherSide(string colliderName) {
+            if (colliderName.Equals(GameWallsManager.leftWallName)) {
+                TryMoveToPosition(new Vector2(mapsize.x - deltaX, transform.position.y));
+            }
+            else if (colliderName.Equals(GameWallsManager.rightsWallName)) {
+                TryMoveToPosition(new Vector2(-deltaX, transform.position.y));
+            }
+            else if (colliderName.Equals(GameWallsManager.bottomWallName)) {
+                TryMoveToPosition(new Vector2(transform.position.x, mapsize.y - deltaY));
+            }
+            else if (colliderName.Equals(GameWallsManager.topWallName)) {
+                TryMoveToPosition(new Vector2(transform.position.x + 0.5f, -deltaY));
+            }
+        }
+
+        private void TryMoveToPosition(Vector2 newPos) {
+            if (boardManager.CanMoveToPosition(newPos)) {
+                transform.position = newPos;
             }
         }
 
         public void updateMapSize() {
-            mapsize = GameObject.Find("GameManager").GetComponent<BoardManager>().boardRealSize;
+            boardManager = RefManager.Instance.GetBoardManager();
+            mapsize = boardManager.boardRealSize;
         } 
     }
 }

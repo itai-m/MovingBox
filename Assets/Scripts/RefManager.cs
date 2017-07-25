@@ -6,7 +6,9 @@ using UnityEngine;
 public class RefManager : Singleton<RefManager> {
 
     private GameManager gameManager;
+    private GameObject gameManagerObj;
     private MapEditorManager mapEditorManager;
+    private BoardManager boardManager;
 
     public int level;
 
@@ -18,7 +20,7 @@ public class RefManager : Singleton<RefManager> {
 
     public GameManager getGameManager() {
         if (gameManager == null) {
-            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            gameManager = GetGameManagerObject().GetComponent<GameManager>();
         }
         return gameManager;
     }
@@ -28,5 +30,19 @@ public class RefManager : Singleton<RefManager> {
             mapEditorManager = GameObject.Find("MapEditorManager").GetComponent<MapEditorManager>();
         }
         return mapEditorManager;
+    }
+
+    public BoardManager GetBoardManager() {
+        if (boardManager == null) {
+            boardManager = GetGameManagerObject().GetComponent<BoardManager>();
+        }
+        return boardManager;
+    }
+
+    public GameObject GetGameManagerObject() {
+        if (gameManagerObj == null) {
+            gameManagerObj = GameObject.Find("GameManager");
+        }
+        return gameManagerObj;
     }
 }
