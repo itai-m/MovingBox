@@ -11,11 +11,16 @@ public class GameData : MonoBehaviour , LevelData   {
     /// </summary>
     /// <returns></returns>
     public List<LevelWorld> GetWorldLevel() {
-        List<LevelWorld> worlds = new List<LevelWorld>();
-        worlds.Add(new LevelWorld("test1", 3));
-
-        return worlds;
+        
+        return LevelLoader.GetWorlds();
     }
+
+    /*
+      List<LevelWorld> worlds = new List<LevelWorld>();
+        worlds.Add(new LevelWorld("W1", 3));
+        worlds.Add(new LevelWorld("W2", 3));
+        return worlds;
+    */
 
     /// <summary>
     /// Decide what happen when user press on level
@@ -24,6 +29,7 @@ public class GameData : MonoBehaviour , LevelData   {
     /// <param name="level"></param>
     public void Startlevel(LevelWorld world, int level) {
         RefManager.Instance.level = level;
+        RefManager.Instance.worldName = world.worldName;
         SceneManager.LoadScene("Game");
     }
 

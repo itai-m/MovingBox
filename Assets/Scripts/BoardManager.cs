@@ -23,11 +23,15 @@ namespace Completed {
             InitBoard();
         }
 
-        public void SetupWithMap(string newMapName) {
-            initMap();
+        public void SetupWithEditorMap(string newMapName) {
             MapSaver mapSaver = new MapSaver();
             mapSaver.LoadMap(newMapName, true);
-            map.LoadMapFromSavedMap(mapSaver.GetMap());
+            SetupSceneMap(mapSaver.GetMap());
+        }
+
+        public void SetupSceneMap(SavedMap newMap) {
+            initMap();
+            map.LoadMapFromSavedMap(newMap);
             InitBoard();
         }
 

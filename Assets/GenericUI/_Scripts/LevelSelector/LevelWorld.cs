@@ -40,4 +40,8 @@ public class LevelWorld {
     public string getKey() {
         return worldKey;
     }
+
+    public override string ToString() {
+        return "Name: " + worldName + ", levels: " + levelCount;
+    }
 }

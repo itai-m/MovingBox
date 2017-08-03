@@ -29,6 +29,11 @@ public class MapSaver {
         LoadMap(fileName, coustomMap);
     }
 
+    public MapSaver(TextAsset asset) {
+        map = DeserializeFromText(asset);
+        CheckAndCreateFolders();
+    }
+
     public MapSaver() {
         CheckAndCreateFolders();
     }
@@ -36,7 +41,14 @@ public class MapSaver {
     public SavedMap GetMap() {
         return map;
     }
-    
+
+    private SavedMap DeserializeFromText(TextAsset text) {
+        Stream s = new MemoryStream(text.bytes);
+        BinaryFormatter bf = new BinaryFormatter();
+        return bf.Deserialize(s) as SavedMap;
+    }
+
+
     private void CheckAndCreateFolders() {
         if (!Directory.Exists(GetMapDirPath())) {
             Directory.CreateDirectory(GetMapDirPath());

@@ -24,11 +24,12 @@ namespace Completed {
             level = RefManager.Instance.level;
             isInMapEditor = RefManager.Instance.mapEditorName.Length != 0;
             if (isInMapEditor) {
-                boardScript.SetupWithMap(RefManager.Instance.mapEditorName);
+                boardScript.SetupWithEditorMap(RefManager.Instance.mapEditorName);
             }
             else {
                 //Call the SetupScene function of the BoardManager script, pass it current level number.
-                boardScript.SetupScene(level);
+                //boardScript.SetupScene(level);
+                boardScript.SetupSceneMap(LevelLoader.GetMap(RefManager.Instance.worldName, level));
             }
             
         }

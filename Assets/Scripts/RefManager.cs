@@ -11,6 +11,7 @@ public class RefManager : Singleton<RefManager> {
     private BoardManager boardManager;
 
     public int level;
+    public string worldName;
 
     public bool isGamePause;
 

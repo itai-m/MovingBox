@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 1509123733
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d9e147b8920d39fc4bb576217feefdb1
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1033bf7ddfd4c6d43e7a6382c0a0a61a
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Levels/W1_1.txt
+- Assets/Levels/W1_0.txt
+- Assets/Levels/W2_0.txt
+- Assets/Levels/W2_1.txt
+Dependencies: []
